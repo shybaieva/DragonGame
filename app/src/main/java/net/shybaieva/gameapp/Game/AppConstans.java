@@ -2,15 +2,20 @@ package net.shybaieva.gameapp.Game;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+
+import net.shybaieva.gameapp.screens.MainGameActivity;
 
 public class AppConstans {
 
     static BitMapBank bitMapBank;
     static GameEngine gameEngine;
-    static int gameBorders = 120;
+    static int cell = 300;
+    static int gameBorders = 134;
     static int screenWidth, screenHigh, gravity;
+
 
 
     public static void init(Context context){
@@ -34,13 +39,13 @@ public class AppConstans {
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
 
-        int width = metrics.widthPixels;
-        int height =metrics.heightPixels;
+        int width = 2068;
+        int height =1080;
 
         AppConstans.screenWidth  = width;
         AppConstans.screenHigh = height;
-
     }
+
 
 
 

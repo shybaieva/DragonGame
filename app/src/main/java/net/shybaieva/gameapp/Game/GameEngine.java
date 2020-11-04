@@ -3,21 +3,21 @@ package net.shybaieva.gameapp.Game;
 import android.graphics.Canvas;
 import android.os.Handler;
 
+import java.util.ArrayList;
+
 public class GameEngine {
 
     BackgroundImage backgroundImage;
     Drago dragon;
     Pumpkin pumpkin;
-    Handler handler;
-    Runnable runnable;
-    static int gameState;
+    static boolean gameState;
 
     public GameEngine() {
         backgroundImage = new BackgroundImage();
         dragon = new Drago();
-        //pumpkin = new Pumpkin();
         pumpkin  = new Pumpkin();
-        gameState = 0; //Not started yet
+        //pumpkinArrayList = new ArrayList<>();
+        gameState = true; //Not started yet
         // 1 - game active
         // 2 - game over
     }
@@ -39,7 +39,7 @@ public class GameEngine {
 
     public void drawDragon(Canvas canvas){
         //borders
-        if(dragon.getDragonY() + AppConstans.gameBorders< (AppConstans.screenHigh - AppConstans.gameBorders)) {
+        if(dragon.getDragonY() + 20< (AppConstans.screenHigh - 20)) {
             dragon.setVelocity(AppConstans.gravity);
             dragon.setDragonY(dragon.getVelocity());
         }
@@ -56,10 +56,4 @@ public class GameEngine {
         dragon.setCurrentFrame(currentFrame);
     }
 
-    public void drawPumpkins(Canvas canvas){
-            canvas.drawBitmap(AppConstans.getBitMapBank().getPumpkin(), pumpkin.getPumpkinX(), pumpkin.getPumpkinY(), null);
-            pumpkin.setPumpkinX(pumpkin.getPumpkinX()-25);
-
-
-    }
 }

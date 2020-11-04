@@ -13,8 +13,9 @@ import java.util.ArrayList;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
      GameThread gameThread;
+    public static float unitW = 0; // пикселей в юните по горизонтали
+    public static float unitH = 0;
      final String LOG_TAG = "MY_LOG_TAG";
-     private ArrayList<Pumpkin> pumpkins = new ArrayList<>();
 
     public GameView(Context context) {
         super(context);
@@ -66,10 +67,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
        // int action = event.getAction();
         if(event.getAction() == MotionEvent.ACTION_UP){
-            GameEngine.gameState=1;
-            AppConstans.getGameEngine().dragon.setVelocity(AppConstans.gravity= (int) event.getY());
-
-            Log.i("Meow", String.valueOf(event.getY()) + "Touch");
+                AppConstans.getGameEngine().dragon.setVelocity(AppConstans.gravity= (int) event.getY());
+                AppConstans.getGameEngine().dragon.setMoveLine((int) Math.floor(event.getY()/180));
+                Log.i("Meow", String.valueOf(AppConstans.getGameEngine().dragon.getMoveLine())+ "DRAGON");
         }
         return true;
     }

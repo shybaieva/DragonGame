@@ -5,11 +5,17 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
+import net.shybaieva.gameapp.screens.MainGameActivity;
+
+import java.util.ArrayList;
+
 public class GameThread extends Thread{
 
     SurfaceHolder surfaceHolder;
     boolean isRunning;
     long startTime, loopTime, loopDelay =50;
+    Pumpkin pumpkin = new Pumpkin();
+    ArrayList<Pumpkin> pumpkins = new ArrayList<>();
 
     final String LOG_TAG = "MY_LOG_TAG";
 
@@ -17,7 +23,7 @@ public class GameThread extends Thread{
         this.surfaceHolder = surfaceHolder;
         isRunning = true;
     }
-    boolean isPumpkinOnTheScreen = false;
+
     @Override
     public void run() {
         while (isRunning){
@@ -27,23 +33,36 @@ public class GameThread extends Thread{
                 synchronized (surfaceHolder){
                     AppConstans.getGameEngine().updateAndDrawBackgroundImage(canvas);
                     AppConstans.getGameEngine().drawDragon(canvas);
-                    AppConstans.getGameEngine().drawPumpkins(canvas);
-                    }
-                    surfaceHolder.unlockCanvasAndPost(canvas);
-
+                    pumpkin.draw(canvas);
                 }
+                    surfaceHolder.unlockCanvasAndPost(canvas);
             }
 
+        }
+            checkCollision();
             loopTime = SystemClock.uptimeMillis() - startTime;
 
-            if(loopTime<loopDelay){
-                try{
-                    Thread.sleep(loopDelay-loopTime);
-                }catch (Exception e){ Log.i(LOG_TAG, e.getMessage());}
+            if(loopTime<loopDelay) {
+                try {
+                    Thread.sleep(loopDelay - loopTime);
+                } catch (Exception e) {
+                    Log.i(LOG_TAG, e.getMessage());
+                }
             }
         }
 
+    private void checkCollision(){ // перебираем все астероиды и проверяем не касается ли один из них корабля
 
+            if(AppConstans.getGameEngine().pumpkin.getPumpkinY()-AppConstans.getGameEngine().dragon.getDragonY()<=20
+            && AppConstans.getGameEngine().pumpkin.getPumpkinX()- AppConstans.getGameEngine().dragon.getDragonX()<=20){
+                // игрок проиграл
+                GameEngine.gameState = false;
+                isRunning=false;
+                Log.i("Meow", "DONE");
+               // AppConstans.getGameEngine().dragon.getDragonX();// останавливаем игру
+                // TODO добавить анимацию взрыва
+        }
+    }
 
     public boolean isRunning(){
         return isRunning;

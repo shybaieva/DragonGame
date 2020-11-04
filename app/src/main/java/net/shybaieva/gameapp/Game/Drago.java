@@ -6,14 +6,23 @@ public class Drago {
 
     private int dragonX, dragonY, currentFrame, velocity;
     public static int maxFrame;
+    private int moveLine;
    // public static int frameHeight;
 
     public Drago(){
-        dragonX = AppConstans.gameBorders;
+        dragonX = 20;
         dragonY = AppConstans.screenHigh/2 - AppConstans.getBitMapBank().getDragonHeight()/2;
         currentFrame=0;
         maxFrame=3;
         velocity=0;
+    }
+
+    public int getMoveLine() {
+        return moveLine;
+    }
+
+    public void setMoveLine(int moveLine) {
+        this.moveLine = moveLine;
     }
 
     public int getCurrentFrame(){

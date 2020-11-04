@@ -1,45 +1,57 @@
 package net.shybaieva.gameapp.Game;
 
+import android.graphics.Canvas;
 import android.util.Log;
-
 import java.util.Random;
 
 public class Pumpkin {
-    private int pumpkinX, pumpkinY;
+    private float pumpkinX, pumpkinY;
 
-    int lineNumber;
-    int amountOfLines = AppConstans.screenHigh/AppConstans.getBitMapBank().getPumpkinHeight();
+    int moveLine;
+    int amountOfLines = 6;
+    float minSpeed = (float) 0.1;
+    float maxSpeed = (float) 0.5;
+
+    float speed;
+
+    float cellHeight = 1080;
 
     public Pumpkin(){
-        Random rnd = new Random();
-        lineNumber= rnd.nextInt(amountOfLines);
-
-        Log.i("Meow", String.valueOf(lineNumber));
-
-        pumpkinY =lineNumber*AppConstans.getBitMapBank().getDragonHeight();
+        Random random = new Random();
+        moveLine= random.nextInt(amountOfLines);
+        Log.i("Meow", String.valueOf(moveLine + "PUMPKIN"));
+        pumpkinY =moveLine*cellHeight;
         pumpkinX = AppConstans.screenWidth-AppConstans.gameBorders;
+        speed = minSpeed + (maxSpeed - minSpeed) * random.nextFloat();
     }
 
-    public int getPumpkinX() {
+    public float getPumpkinX() {
         return pumpkinX;
     }
 
-    public void setPumpkinX(int pumpkinX) {
-        this.pumpkinX = pumpkinX;
+    public void setPumpkinX(float pumpkinX) {
+        this.pumpkinX = pumpkinX -10;
     }
 
-    public int getPumpkinY() {
+    public float getPumpkinY() {
         return pumpkinY;
     }
 
-    public void setPumpkinY(int pumpkinY) {
-        this.pumpkinY = pumpkinY;
+    public void setPumpkinY() {
+        this.pumpkinY = getRandomLine();
     }
 
-    public boolean isCollision(){
-        if(pumpkinX==AppConstans.getGameEngine().dragon.getDragonX() && pumpkinY==AppConstans.getGameEngine().dragon.getDragonY())
-        return true;
-        else
-            return false;
+    public int getRandomLine(){
+        Random random = new Random();
+        return random.nextInt(6);
+    }
+
+    public void draw(Canvas canvas){
+        canvas.drawBitmap(AppConstans.getBitMapBank().getPumpkin(), getPumpkinX(), getPumpkinY(), null);
+        setPumpkinX(getPumpkinX());
+        if(getPumpkinX()<AppConstans.gameBorders - 70){
+            setPumpkinX(AppConstans.screenWidth);
+            setPumpkinY();
+        }
     }
 }
