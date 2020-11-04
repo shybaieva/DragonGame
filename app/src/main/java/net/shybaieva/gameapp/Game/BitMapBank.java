@@ -48,6 +48,10 @@ public class BitMapBank {
         return pumpkin.getWidth();
     }
 
+    public int getFoodWidth(){
+        return food.getWidth();
+    }
+
     public int getPumpkinHeight(){
         return pumpkin.getHeight();
     }
@@ -55,6 +59,7 @@ public class BitMapBank {
     public Bitmap getFood() {
         return food;
     }
+
 
     public void setFood(Bitmap food) {
         this.food = food;

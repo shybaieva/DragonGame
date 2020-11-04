@@ -1,6 +1,7 @@
 package net.shybaieva.gameapp.Game;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -17,12 +18,14 @@ public class AppConstans {
     static int speed=10;
     static int screenWidth, screenHigh, gravity;
 
+
     public static void init(Context context){
         setScreenSize(context);
         bitMapBank = new BitMapBank(context.getResources());
         gameBorders=bitMapBank.getDragonWidth();
         gravity = 100;
         lineHeight=180;
+        currentScore=0;
     }
 
     public static BitMapBank getBitMapBank(){

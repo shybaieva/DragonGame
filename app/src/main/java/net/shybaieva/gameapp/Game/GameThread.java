@@ -15,13 +15,19 @@ public class GameThread extends Thread{
     Paint paint = new Paint();
     boolean isRunning;
     static boolean gameState;
-    long startTime, loopTime, loopDelay =50;
-    Pumpkin pumpkin = new Pumpkin();
+    long startTime, loopTime, loopDelay =250;
+    int currentTime=0;
+    int score;
+    final int timeForNewElement = 50;
+    Pumpkin pumpkin1 = new Pumpkin();
+    Pumpkin pumpkin2 = new Pumpkin();
+    Pumpkin pumpkin3 = new Pumpkin();
     Drago drago = new  Drago();
     Food food = new Food();
+    int countPumpkinOnScreen;
     AppConstans appConstans = new AppConstans();
     BackgroundImage backgroundImage = new BackgroundImage();
-    boolean isSpeedRaised=false;
+
     ArrayList<Pumpkin> pumpkins = new ArrayList<>();
 
     final String LOG_TAG = "MY_LOG_TAG";
@@ -33,7 +39,9 @@ public class GameThread extends Thread{
         paint.setTextSize(50);
         paint.setElegantTextHeight(true);
 
-
+        pumpkins.add(pumpkin1);
+        pumpkins.add(pumpkin2);
+        pumpkins.add(pumpkin3);
     }
 
     @Override
@@ -46,11 +54,17 @@ public class GameThread extends Thread{
                     backgroundImage.updateAndDrawBackgroundImage(canvas);
                     drago.drawDragon(canvas);
                     food.draw(canvas);
-                    pumpkin.draw(canvas);
-                    gameState = checkCollision();
-                    setScore();
-
-                    canvas.drawText("Score: "+ appConstans.getCurrentScore(),
+                   // pumpkin.draw(canvas);
+                    for (Pumpkin pumpkin: pumpkins
+                         ) {
+                        pumpkin.draw(canvas);
+                    }
+                    checkIfNewPumpkin();
+                    checkCollision();
+                   // Log.i("Meow", String.valueOf(drago.getDragonX()+drago.getFrameWidth()));
+                  //  Log.i("Meow", String.valueOf(food.getFoodX()));
+                    increaseScore();
+                    canvas.drawText("Score: "+ score,
                             60,
                             80, paint);
                 }
@@ -69,25 +83,37 @@ public class GameThread extends Thread{
         }
 
     private boolean checkCollision(){
-       // Log.i("Meow", String.valueOf(drago.getDragonX()) + " DRAGON X");
-        //Log.i("Meow", pumpkin.getPumpkinX()+ " PUMPKIN X");
 
-            if( drago.getDragonX()+drago.getFrameWidth()-10>=pumpkin.getPumpkinX()&& drago.getDragonY()==pumpkin.getPumpkinY()){
+        for (Pumpkin pumpkin: pumpkins
+        ) {
+            if( drago.getDragonX()+drago.getFrameWidth()-15>=pumpkin.getPumpkinX()&& drago.getDragonY()==pumpkin.getPumpkinY()){
                 gameState = false;
                 isRunning=false;
                 return false;
+            }
         }
             return true;
     }
 
-    public void setScore(){
+    private void increaseScore(){
+            if( drago.getDragonX()+drago.getFrameWidth()-15>=food.getFoodX()&& drago.getDragonY()==food.getFoodY()){
 
-        /*if(drago.getDragonY()==food.getFoodY() && drago.getDragonX()==food.getFoodX()){
-           // appConstans.setCurrentScore(appConstans.getCurrentScore()+10);
-            appConstans.setCurrentScore(appConstans.getCurrentScore()+10);
-            Log.i("Meow", appConstans.getCurrentScore()+ " PUMPKIN X");
+              score+=10;
+              food.setFoodX(AppConstans.screenWidth);
+             //   Log.i("Meow", String.valueOf(drago.getDragonX()+drago.getFrameWidth()));
+            //    Log.i("Meow", String.valueOf(food.getFoodX()));
+               Log.i("Meow", String.valueOf(score));//&&drago.getDragonY()==food.getFoodY()
+            }
+    }
 
-        }*/
+    private void checkIfNewPumpkin(){
+        if(currentTime >= timeForNewElement  && pumpkins.size()<=4){
+            Pumpkin pumpkin= new Pumpkin();
+            pumpkins.add(pumpkin);
+            currentTime = 0;
+        }else{
+            currentTime ++;
+        }
     }
 
     public boolean isRunning(){

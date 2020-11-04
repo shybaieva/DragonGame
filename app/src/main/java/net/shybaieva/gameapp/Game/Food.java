@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class Food {
     private int foodX, foodY;
-    int moveLine;
 
     public Food() {
         foodX = AppConstans.screenWidth;
@@ -29,11 +28,6 @@ public class Food {
         this.foodY = getRandomLine()*AppConstans.lineHeight;
     }
 
-
-    public void setMoveLine(int moveLine) {
-        this.moveLine = moveLine;
-    }
-
     public int getRandomLine(){
         Random random = new Random();
         return random.nextInt(4);
@@ -42,13 +36,13 @@ public class Food {
     public void draw (Canvas canvas){
         canvas.drawBitmap(AppConstans.getBitMapBank().getFood(), foodX, foodY, null);
         setFoodX( getFoodX());
-        if(foodX<=AppConstans.gameBorders){
+        if(foodX+AppConstans.getBitMapBank().getFoodWidth()<=0){
             setFoodY(0);
             setFoodX(AppConstans.screenWidth);
             setFoodY(getRandomLine());
             getFoodY();
             AppConstans.speed++;
-            AppConstans.currentScore+=10;
         }
+        else AppConstans.currentScore+=10;
     }
 }

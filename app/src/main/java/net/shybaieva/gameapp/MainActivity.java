@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.shybaieva.gameapp.screens.GameActivity;
 import net.shybaieva.gameapp.screens.MainGameActivity;
@@ -16,8 +17,9 @@ import net.shybaieva.gameapp.service.NetworkManager;
 public class MainActivity extends AppCompatActivity {
 
     TextView tv;
-    boolean isFirstLaunch = true, isInternetWasConnected;
-
+    boolean isFirstLaunch = true;
+            int isInternetWasConnected;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,37 +28,36 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-        if(isFirstLaunch){
+        sharedPreferences=getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+        boolean hasVisited = sharedPreferences.getBoolean("hasVisited", false);
+
+        if(!hasVisited){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("hasVisited", true);
+
             if(NetworkManager.isInternetConnectionAvailable(this)){
-            //1
-                isInternetWasConnected = true;
-                startActivity(new Intent(this, WebViewActivity.class));
+                isInternetWasConnected = 1;
             }
             else {
-            //0
-                isInternetWasConnected=false;
-                startActivity(new Intent(this, GameActivity.class));
-
+                isInternetWasConnected=0;
             }
-            finish();
+            editor.putInt("isInternetWasConnected", isInternetWasConnected);
+            editor.commit();
         }
-        else{
+        else {
+            isInternetWasConnected=sharedPreferences.getInt("isInternetWasConnected",2);
         }
+
+        if(isInternetWasConnected==1)
+            startActivity(new Intent(this, GameActivity.class));
+        if(isInternetWasConnected==0)
+            startActivity(new Intent(this, WebViewActivity.class));
+        if(isInternetWasConnected==2)
+            Toast.makeText(this, "SOME PROBLEMS WITH PREFERENCES", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     private void init(){
         tv=findViewById(R.id.textCheck);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-       // isFirstLaunch = pref.getBoolean("isFirstLaunch", )
     }
 }
