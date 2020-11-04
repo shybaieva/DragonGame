@@ -5,14 +5,13 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-import net.shybaieva.gameapp.screens.MainGameActivity;
-
 import java.util.ArrayList;
 
 public class GameThread extends Thread{
 
     SurfaceHolder surfaceHolder;
     boolean isRunning;
+    static boolean gameState;
     long startTime, loopTime, loopDelay =50;
     Pumpkin pumpkin = new Pumpkin();
     Drago drago = new  Drago();
@@ -34,9 +33,9 @@ public class GameThread extends Thread{
             if(canvas!=null){
                 synchronized (surfaceHolder){
                     backgroundImage.updateAndDrawBackgroundImage(canvas);
-                   drago.drawDragon(canvas);
+                    drago.drawDragon(canvas);
                     pumpkin.draw(canvas);
-                    checkCollision();
+                    gameState = checkCollision();
                 }
                     surfaceHolder.unlockCanvasAndPost(canvas);
             }
@@ -52,19 +51,21 @@ public class GameThread extends Thread{
             }
         }
 
-    private void checkCollision(){
+    private boolean checkCollision(){
 
-        Log.i("Meow", String.valueOf(drago.getDragonY())+" DRAGON");
-        Log.i("Meow", String.valueOf(pumpkin.getPumpkinY()) +" PUMPKIN");
+        Log.i("Meow", String.valueOf(drago.getDragonX())+" DRAGON");
+        Log.i("Meow", String.valueOf(pumpkin.getPumpkinX()) +" PUMPKIN");
 
-            if(drago.getDragonY()==pumpkin.getPumpkinY()){
-                GameEngine.gameState = false;
+            if(drago.getDragonY()==pumpkin.getPumpkinY() && drago.getDragonX()+drago.getFrameWidth()==pumpkin.getPumpkinX()){
+                gameState = false;
                 isRunning=false;
                 Log.i("Meow", String.valueOf(drago.getMoveLine())+" DRAGON");
                 Log.i("Meow", String.valueOf(pumpkin.getMoveLine()) +" PUMPKIN");
                 Log.i("Meow", "DONE");
                 // TODO добавить анимацию взрыва
+                return false;
         }
+            return true;
     }
 
     public boolean isRunning(){

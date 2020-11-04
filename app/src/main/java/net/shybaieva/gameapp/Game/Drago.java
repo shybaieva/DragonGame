@@ -9,14 +9,19 @@ public class Drago {
     private int dragonX, dragonY, currentFrame, velocity;
     public static int maxFrame;
     private int moveLine;
-   // public static int frameHeight;
+    private static int frameWidth;
 
     public Drago(){
-        dragonX = 20;
+        dragonX =100;
         dragonY = AppConstans.screenHigh/2 - AppConstans.getBitMapBank().getDragonHeight()/2;
+        frameWidth = AppConstans.getBitMapBank().getDragonWidth();
         currentFrame=0;
         maxFrame=3;
         velocity=0;
+    }
+
+    public int getFrameWidth() {
+        return frameWidth;
     }
 
     public int getMoveLine() {

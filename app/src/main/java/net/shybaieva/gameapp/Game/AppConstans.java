@@ -11,26 +11,19 @@ import net.shybaieva.gameapp.screens.MainGameActivity;
 public class AppConstans {
 
     static BitMapBank bitMapBank;
-    static GameEngine gameEngine;
     static int cell = 300;
-    static int gameBorders = 134;
+    static int gameBorders;
     static int screenWidth, screenHigh, gravity;
-
-
 
     public static void init(Context context){
         setScreenSize(context);
         bitMapBank = new BitMapBank(context.getResources());
-        gameEngine = new GameEngine();
+        gameBorders=bitMapBank.getDragonWidth();
         gravity = 100;
     }
 
     public static BitMapBank getBitMapBank(){
         return bitMapBank;
-    }
-
-    public static GameEngine getGameEngine(){
-        return gameEngine;
     }
 
     private static void setScreenSize(Context context){
@@ -45,8 +38,5 @@ public class AppConstans {
         AppConstans.screenWidth  = width;
         AppConstans.screenHigh = height;
     }
-
-
-
 
 }

@@ -12,10 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameApp">
-        <activity android:name=".screens.MainGameActivity"
-            android:screenOrientation="landscape"></activity>
-        <activity android:name=".screens.GameActivity"
-            android:screenOrientation="landscape"></activity>
+        <activity android:name=".screens.EndGameActivity"
+            android:screenOrientation="landscape" ></activity>
+        <activity
+            android:name=".screens.MainGameActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".screens.GameActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".screens.WebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />

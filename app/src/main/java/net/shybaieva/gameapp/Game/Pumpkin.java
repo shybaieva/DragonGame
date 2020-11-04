@@ -6,13 +6,11 @@ import java.util.Random;
 
 public class Pumpkin {
     private int pumpkinX, pumpkinY=360;
-
     int moveLine;
 
     public Pumpkin(){
-        //pumpkinY =getPumpkinY();
         Log.i("Meow", String.valueOf(pumpkinY + "PUMPKIN y"));
-        pumpkinX = AppConstans.screenWidth-AppConstans.gameBorders;
+        pumpkinX=AppConstans.screenWidth;
     }
 
     public int getPumpkinX() {
@@ -43,7 +41,7 @@ public class Pumpkin {
     public void draw(Canvas canvas){
         canvas.drawBitmap(AppConstans.getBitMapBank().getPumpkin(), pumpkinX, pumpkinY , null);
         setPumpkinX( getPumpkinX());
-        if(pumpkinX<AppConstans.gameBorders - 70){
+        if(pumpkinX<=AppConstans.gameBorders){
             setPumpkinY(0);
             setPumpkinX(AppConstans.screenWidth);
             setPumpkinY(getRandomLine());

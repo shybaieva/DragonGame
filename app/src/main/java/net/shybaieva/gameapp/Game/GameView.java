@@ -13,15 +13,12 @@ import java.util.ArrayList;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
      GameThread gameThread;
-    public static float unitW = 0; // пикселей в юните по горизонтали
-    public static float unitH = 0;
      final String LOG_TAG = "MY_LOG_TAG";
 
     public GameView(Context context) {
         super(context);
         initView();
     }
-
 
     void initView(){
         SurfaceHolder holder = getHolder();
@@ -65,15 +62,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        // int action = event.getAction();
         if(event.getAction() == MotionEvent.ACTION_UP){
             int moveLine = (int) (event.getY()/180);
             gameThread.drago.setVelocity(moveLine*180);
-            //drago.setVelocity( );
-
-
-            //AppConstans.getGameEngine().dragon.setDragonY((int) event.getY());
-            //  Log.i("Meow", String.valueOf(AppConstans.getGameEngine().dragon.getMoveLine())+ "DRAGON");
         }
         return true;
     }
