@@ -13,8 +13,8 @@ public class AppConstans {
     static int lineHeight;
     static int gameBorders;
 
-    int currentScore;
-    int speed=10;
+    static int currentScore;
+    static int speed=10;
     static int screenWidth, screenHigh, gravity;
 
     public static void init(Context context){

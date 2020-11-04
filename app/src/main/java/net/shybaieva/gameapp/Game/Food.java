@@ -18,7 +18,7 @@ public class Food {
     }
 
     public void setFoodX(int foodX) {
-        this.foodX = foodX - 5;
+        this.foodX = foodX - AppConstans.speed;
     }
 
     public int getFoodY() {
@@ -47,6 +47,8 @@ public class Food {
             setFoodX(AppConstans.screenWidth);
             setFoodY(getRandomLine());
             getFoodY();
+            AppConstans.speed++;
+            AppConstans.currentScore+=10;
         }
     }
 }

@@ -13,7 +13,7 @@ public class Drago {
 
     public Drago(){
         dragonX =100;
-        dragonY = AppConstans.screenHigh/2 - AppConstans.getBitMapBank().getDragonHeight()/2;
+        this.dragonY =360;
         frameWidth = AppConstans.getBitMapBank().getDragonWidth();
         currentFrame=0;
         maxFrame=3;

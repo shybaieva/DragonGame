@@ -28,7 +28,7 @@ public class Pumpkin {
 
 
     public void setPumpkinX(int pumpkinX) {
-        this.pumpkinX = pumpkinX - getSpeed();
+        this.pumpkinX = pumpkinX - AppConstans.speed;
     }
 
     public int getPumpkinY() {
@@ -47,11 +47,13 @@ public class Pumpkin {
     public void draw(Canvas canvas){
         canvas.drawBitmap(AppConstans.getBitMapBank().getPumpkin(), pumpkinX, pumpkinY , null);
         setPumpkinX( getPumpkinX());
-        if(pumpkinX<=0){
+        if(pumpkinX<=10){
             setPumpkinY(0);
             setPumpkinX(AppConstans.screenWidth);
             setPumpkinY(getRandomLine());
             getPumpkinY();
+            //setSpeed(getSpeed()+3);
+
         }
     }
 }
