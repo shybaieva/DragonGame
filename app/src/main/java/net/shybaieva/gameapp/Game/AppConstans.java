@@ -9,10 +9,12 @@ import android.view.WindowManager;
 import net.shybaieva.gameapp.screens.MainGameActivity;
 
 public class AppConstans {
-
     static BitMapBank bitMapBank;
-    static int cell = 300;
+    static int lineHeight;
     static int gameBorders;
+
+    int currentScore;
+    int speed=10;
     static int screenWidth, screenHigh, gravity;
 
     public static void init(Context context){
@@ -20,6 +22,7 @@ public class AppConstans {
         bitMapBank = new BitMapBank(context.getResources());
         gameBorders=bitMapBank.getDragonWidth();
         gravity = 100;
+        lineHeight=180;
     }
 
     public static BitMapBank getBitMapBank(){
@@ -39,4 +42,23 @@ public class AppConstans {
         AppConstans.screenHigh = height;
     }
 
+    public static int getGameBorders() {
+        return gameBorders;
+    }
+
+    public int getCurrentScore() {
+        return currentScore;
+    }
+
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 }

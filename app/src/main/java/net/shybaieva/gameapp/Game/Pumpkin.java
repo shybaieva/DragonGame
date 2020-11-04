@@ -5,20 +5,30 @@ import android.util.Log;
 import java.util.Random;
 
 public class Pumpkin {
-    private int pumpkinX, pumpkinY=360;
-    int moveLine;
+    private int pumpkinX, pumpkinY;
+    private int speed=7;
 
     public Pumpkin(){
         Log.i("Meow", String.valueOf(pumpkinY + "PUMPKIN y"));
-        pumpkinX=AppConstans.screenWidth;
+        pumpkinY=2*AppConstans.lineHeight;
+        this.pumpkinX=AppConstans.screenWidth;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
     public int getPumpkinX() {
         return pumpkinX;
     }
 
+
     public void setPumpkinX(int pumpkinX) {
-        this.pumpkinX = pumpkinX -10;
+        this.pumpkinX = pumpkinX - getSpeed();
     }
 
     public int getPumpkinY() {
@@ -26,7 +36,7 @@ public class Pumpkin {
     }
 
     public void setPumpkinY(int y) {
-        this.pumpkinY =y*180;
+        this.pumpkinY =y*AppConstans.lineHeight;
     }
 
     public int getRandomLine(){
@@ -34,14 +44,10 @@ public class Pumpkin {
         return random.nextInt(4);
     }
 
-    public int getMoveLine() {
-        return moveLine;
-    }
-
     public void draw(Canvas canvas){
         canvas.drawBitmap(AppConstans.getBitMapBank().getPumpkin(), pumpkinX, pumpkinY , null);
         setPumpkinX( getPumpkinX());
-        if(pumpkinX<=AppConstans.gameBorders){
+        if(pumpkinX<=0){
             setPumpkinY(0);
             setPumpkinX(AppConstans.screenWidth);
             setPumpkinY(getRandomLine());

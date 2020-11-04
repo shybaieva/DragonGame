@@ -32,8 +32,11 @@ public class MainGameActivity extends Activity {
 
         Log.i("Meow", String.valueOf(SCREEN_WIDTH) + "WIDTH SCREEN");
         Log.i("Meow", String.valueOf(SCREEN_HEIGHT) + "HEIGHT SCREEN");
+
         gameView = new GameView(this);
+
         setContentView(gameView);
+
 
     }
 

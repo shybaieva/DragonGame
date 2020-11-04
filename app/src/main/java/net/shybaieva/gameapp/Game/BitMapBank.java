@@ -12,12 +12,15 @@ public class BitMapBank {
     Bitmap background;
     Bitmap [] dragon;
     Bitmap pumpkin;
+    Bitmap food;
 
     public BitMapBank(Resources res) {
         background = BitmapFactory.decodeResource(res, R.drawable.background_game);
         background = scaleImg(background);
 
         pumpkin = BitmapFactory.decodeResource(res, R.drawable.pumpkin);
+        food = BitmapFactory.decodeResource(res, R.drawable.food);
+
         dragon = new Bitmap[4];
 
         dragon[0] = BitmapFactory.decodeResource(res, R.drawable.move_straight1);
@@ -47,6 +50,14 @@ public class BitMapBank {
 
     public int getPumpkinHeight(){
         return pumpkin.getHeight();
+    }
+
+    public Bitmap getFood() {
+        return food;
+    }
+
+    public void setFood(Bitmap food) {
+        this.food = food;
     }
 
     public  Bitmap getBackground(){
