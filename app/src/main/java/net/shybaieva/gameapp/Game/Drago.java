@@ -1,5 +1,7 @@
 package net.shybaieva.gameapp.Game;
 
+import android.graphics.Canvas;
+
 import net.shybaieva.gameapp.Game.AppConstans;
 
 public class Drago {
@@ -59,6 +61,24 @@ public class Drago {
 
     public void setVelocity(int velocity) {
         this.velocity = velocity;
+    }
+
+    public void drawDragon(Canvas canvas){
+        //borders
+        if(getDragonY() + 20< (AppConstans.screenHigh - 20)) {
+            setDragonY(getVelocity());
+        }
+
+        int currentFrame = getCurrentFrame();
+        canvas.drawBitmap(AppConstans.getBitMapBank().getDragon(currentFrame),
+                getDragonX(), getDragonY(), null);
+        currentFrame++;
+
+        if(currentFrame > getMaxFrame()){
+            currentFrame = 0;
+        }
+
+        setCurrentFrame(currentFrame);
     }
 
 }

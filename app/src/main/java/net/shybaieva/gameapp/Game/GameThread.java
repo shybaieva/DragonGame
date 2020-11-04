@@ -15,6 +15,8 @@ public class GameThread extends Thread{
     boolean isRunning;
     long startTime, loopTime, loopDelay =50;
     Pumpkin pumpkin = new Pumpkin();
+    Drago drago = new  Drago();
+    BackgroundImage backgroundImage = new BackgroundImage();
     ArrayList<Pumpkin> pumpkins = new ArrayList<>();
 
     final String LOG_TAG = "MY_LOG_TAG";
@@ -31,15 +33,14 @@ public class GameThread extends Thread{
             Canvas canvas = surfaceHolder.lockCanvas(null);
             if(canvas!=null){
                 synchronized (surfaceHolder){
-                    AppConstans.getGameEngine().updateAndDrawBackgroundImage(canvas);
-                    AppConstans.getGameEngine().drawDragon(canvas);
+                    backgroundImage.updateAndDrawBackgroundImage(canvas);
+                   drago.drawDragon(canvas);
                     pumpkin.draw(canvas);
+                    checkCollision();
                 }
                     surfaceHolder.unlockCanvasAndPost(canvas);
             }
-
         }
-            checkCollision();
             loopTime = SystemClock.uptimeMillis() - startTime;
 
             if(loopTime<loopDelay) {
@@ -51,15 +52,17 @@ public class GameThread extends Thread{
             }
         }
 
-    private void checkCollision(){ // перебираем все астероиды и проверяем не касается ли один из них корабля
+    private void checkCollision(){
 
-            if(AppConstans.getGameEngine().pumpkin.getPumpkinY()-AppConstans.getGameEngine().dragon.getDragonY()<=20
-            && AppConstans.getGameEngine().pumpkin.getPumpkinX()- AppConstans.getGameEngine().dragon.getDragonX()<=20){
-                // игрок проиграл
+        Log.i("Meow", String.valueOf(drago.getDragonY())+" DRAGON");
+        Log.i("Meow", String.valueOf(pumpkin.getPumpkinY()) +" PUMPKIN");
+
+            if(drago.getDragonY()==pumpkin.getPumpkinY()){
                 GameEngine.gameState = false;
                 isRunning=false;
+                Log.i("Meow", String.valueOf(drago.getMoveLine())+" DRAGON");
+                Log.i("Meow", String.valueOf(pumpkin.getMoveLine()) +" PUMPKIN");
                 Log.i("Meow", "DONE");
-               // AppConstans.getGameEngine().dragon.getDragonX();// останавливаем игру
                 // TODO добавить анимацию взрыва
         }
     }

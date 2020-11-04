@@ -22,7 +22,7 @@ public class AppConstans {
         setScreenSize(context);
         bitMapBank = new BitMapBank(context.getResources());
         gameEngine = new GameEngine();
-        gravity = 30;
+        gravity = 100;
     }
 
     public static BitMapBank getBitMapBank(){

@@ -65,11 +65,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-       // int action = event.getAction();
+        // int action = event.getAction();
         if(event.getAction() == MotionEvent.ACTION_UP){
-                AppConstans.getGameEngine().dragon.setVelocity(AppConstans.gravity= (int) event.getY());
-                AppConstans.getGameEngine().dragon.setMoveLine((int) Math.floor(event.getY()/180));
-                Log.i("Meow", String.valueOf(AppConstans.getGameEngine().dragon.getMoveLine())+ "DRAGON");
+            int moveLine = (int) (event.getY()/180);
+            gameThread.drago.setVelocity(moveLine*180);
+            //drago.setVelocity( );
+
+
+            //AppConstans.getGameEngine().dragon.setDragonY((int) event.getY());
+            //  Log.i("Meow", String.valueOf(AppConstans.getGameEngine().dragon.getMoveLine())+ "DRAGON");
         }
         return true;
     }

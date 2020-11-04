@@ -1,5 +1,7 @@
 package net.shybaieva.gameapp.Game;
 
+import android.graphics.Canvas;
+
 public class BackgroundImage {
 
     private int backgroundX, backgroundY, backgroundVelocity;
@@ -30,5 +32,16 @@ public class BackgroundImage {
         return backgroundVelocity;
     }
 
-
+    public void updateAndDrawBackgroundImage(Canvas canvas){
+        setX(getX() - getVelocity());
+        if(getX()< -AppConstans.getBitMapBank().getBackgroundWidth()){
+            setX(0);
+        }
+        canvas.drawBitmap(AppConstans.getBitMapBank().getBackground(), getX(), getY(), null);
+        if(getX() < -(AppConstans.getBitMapBank().getBackgroundWidth() - AppConstans.screenWidth)){
+            canvas.drawBitmap(AppConstans.getBitMapBank().getBackground(), getX()+
+                            AppConstans.getBitMapBank().getBackgroundWidth(),
+                    getY(), null);
+        }
+    }
 }

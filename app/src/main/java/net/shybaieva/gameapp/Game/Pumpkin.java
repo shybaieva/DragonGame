@@ -5,54 +5,49 @@ import android.util.Log;
 import java.util.Random;
 
 public class Pumpkin {
-    private float pumpkinX, pumpkinY;
+    private int pumpkinX, pumpkinY=360;
 
     int moveLine;
-    int amountOfLines = 6;
-    float minSpeed = (float) 0.1;
-    float maxSpeed = (float) 0.5;
-    int minCoordinate=134;
-    int maxCoordinate=1080-minCoordinate*2;
-    float speed;
-
-    float cellHeight = 1080;
 
     public Pumpkin(){
-        Random random = new Random();
-       // moveLine= random.nextInt(amountOfLines);
-        Log.i("Meow", String.valueOf(moveLine + "PUMPKIN"));
-        pumpkinY =random.nextInt(maxCoordinate)+minCoordinate;
+        //pumpkinY =getPumpkinY();
+        Log.i("Meow", String.valueOf(pumpkinY + "PUMPKIN y"));
         pumpkinX = AppConstans.screenWidth-AppConstans.gameBorders;
-        speed = minSpeed + (maxSpeed - minSpeed) * random.nextFloat();
     }
 
-    public float getPumpkinX() {
+    public int getPumpkinX() {
         return pumpkinX;
     }
 
-    public void setPumpkinX(float pumpkinX) {
+    public void setPumpkinX(int pumpkinX) {
         this.pumpkinX = pumpkinX -10;
     }
 
-    public float getPumpkinY() {
+    public int getPumpkinY() {
         return pumpkinY;
     }
 
-    public void setPumpkinY() {
-        this.pumpkinY = getRandomLine();
+    public void setPumpkinY(int y) {
+        this.pumpkinY =y*180;
     }
 
     public int getRandomLine(){
         Random random = new Random();
-        return random.nextInt(maxCoordinate)+minCoordinate;
+        return random.nextInt(4);
+    }
+
+    public int getMoveLine() {
+        return moveLine;
     }
 
     public void draw(Canvas canvas){
-        canvas.drawBitmap(AppConstans.getBitMapBank().getPumpkin(), getPumpkinX(), getPumpkinY(), null);
-        setPumpkinX(getPumpkinX());
-        if(getPumpkinX()<AppConstans.gameBorders - 70){
+        canvas.drawBitmap(AppConstans.getBitMapBank().getPumpkin(), pumpkinX, pumpkinY , null);
+        setPumpkinX( getPumpkinX());
+        if(pumpkinX<AppConstans.gameBorders - 70){
+            setPumpkinY(0);
             setPumpkinX(AppConstans.screenWidth);
-            setPumpkinY();
+            setPumpkinY(getRandomLine());
+            getPumpkinY();
         }
     }
 }
