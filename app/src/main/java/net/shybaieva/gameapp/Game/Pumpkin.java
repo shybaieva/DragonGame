@@ -11,16 +11,17 @@ public class Pumpkin {
     int amountOfLines = 6;
     float minSpeed = (float) 0.1;
     float maxSpeed = (float) 0.5;
-
+    int minCoordinate=134;
+    int maxCoordinate=1080-minCoordinate*2;
     float speed;
 
     float cellHeight = 1080;
 
     public Pumpkin(){
         Random random = new Random();
-        moveLine= random.nextInt(amountOfLines);
+       // moveLine= random.nextInt(amountOfLines);
         Log.i("Meow", String.valueOf(moveLine + "PUMPKIN"));
-        pumpkinY =moveLine*cellHeight;
+        pumpkinY =random.nextInt(maxCoordinate)+minCoordinate;
         pumpkinX = AppConstans.screenWidth-AppConstans.gameBorders;
         speed = minSpeed + (maxSpeed - minSpeed) * random.nextFloat();
     }
@@ -43,7 +44,7 @@ public class Pumpkin {
 
     public int getRandomLine(){
         Random random = new Random();
-        return random.nextInt(6);
+        return random.nextInt(maxCoordinate)+minCoordinate;
     }
 
     public void draw(Canvas canvas){
