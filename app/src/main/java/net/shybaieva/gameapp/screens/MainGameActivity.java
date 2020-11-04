@@ -9,11 +9,14 @@ import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 
+import net.shybaieva.gameapp.Game.AppConstans;
+import net.shybaieva.gameapp.Game.GameThread;
 import net.shybaieva.gameapp.Game.GameView;
 
 public class MainGameActivity extends Activity {
 
     GameView gameView;
+    GameThread gameThread;
     public int SCREEN_WIDTH;
     public int SCREEN_HEIGHT;
 
@@ -36,10 +39,7 @@ public class MainGameActivity extends Activity {
         gameView = new GameView(this);
 
         setContentView(gameView);
-
-
     }
-
 
     public int getSCREEN_WIDTH() {
         return SCREEN_WIDTH;

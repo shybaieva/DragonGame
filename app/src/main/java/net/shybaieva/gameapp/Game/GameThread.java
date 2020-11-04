@@ -89,6 +89,7 @@ public class GameThread extends Thread{
             if( drago.getDragonX()+drago.getFrameWidth()-15>=pumpkin.getPumpkinX()&& drago.getDragonY()==pumpkin.getPumpkinY()){
                 gameState = false;
                 isRunning=false;
+                AppConstans.currentScore=score;
                 return false;
             }
         }
@@ -99,6 +100,7 @@ public class GameThread extends Thread{
             if( drago.getDragonX()+drago.getFrameWidth()-15>=food.getFoodX()&& drago.getDragonY()==food.getFoodY()){
 
               score+=10;
+              AppConstans.speed+=1;
               food.setFoodX(AppConstans.screenWidth);
              //   Log.i("Meow", String.valueOf(drago.getDragonX()+drago.getFrameWidth()));
             //    Log.i("Meow", String.valueOf(food.getFoodX()));
