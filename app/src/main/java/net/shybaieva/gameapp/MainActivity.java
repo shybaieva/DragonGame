@@ -16,17 +16,13 @@ import net.shybaieva.gameapp.service.NetworkManager;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tv;
-    boolean isFirstLaunch = true;
-            int isInternetWasConnected;
+    int isInternetWasConnected;
     SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        init();
 
         sharedPreferences=getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
         boolean hasVisited = sharedPreferences.getBoolean("hasVisited", false);
@@ -55,9 +51,5 @@ public class MainActivity extends AppCompatActivity {
         if(isInternetWasConnected==2)
             Toast.makeText(this, "SOME PROBLEMS WITH PREFERENCES", Toast.LENGTH_SHORT).show();
         finish();
-    }
-
-    private void init(){
-        tv=findViewById(R.id.textCheck);
     }
 }

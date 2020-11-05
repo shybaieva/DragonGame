@@ -1,6 +1,8 @@
 package net.shybaieva.gameapp.screens;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,9 +18,11 @@ import net.shybaieva.gameapp.Game.GameView;
 public class MainGameActivity extends Activity {
 
     GameView gameView;
-    GameThread gameThread;
     public int SCREEN_WIDTH;
     public int SCREEN_HEIGHT;
+    GameThread gameThread;
+    public int maxScore;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,20 +37,27 @@ public class MainGameActivity extends Activity {
         SCREEN_WIDTH = size.x;
         SCREEN_HEIGHT = size.y;
 
-        Log.i("Meow", String.valueOf(SCREEN_WIDTH) + "WIDTH SCREEN");
-        Log.i("Meow", String.valueOf(SCREEN_HEIGHT) + "HEIGHT SCREEN");
-
         gameView = new GameView(this);
 
         setContentView(gameView);
-    }
 
-    public int getSCREEN_WIDTH() {
-        return SCREEN_WIDTH;
-    }
+        /*SharedPreferences sp = getSharedPreferences("MY_SETTINGS",
+                Context.MODE_PRIVATE);
+        boolean hasVisited = sp.getBoolean("hasPlayed", false);
+        SharedPreferences.Editor e = sp.edit();
 
-    public int getSCREEN_HEIGHT() {
-        return SCREEN_HEIGHT;
+        if (!hasVisited) {
+            e.putBoolean("hasPlayed", true);
+            e.putInt("MaxScore", 1);
+        }
+        else{
+            if( preferences.getInt("MaxScore", 5)!=0)
+            maxScore =preferences.getInt("MaxScore", 0);
+            if(gameThread.score > maxScore){
+                e.putInt("MaxScore", gameThread.score);
+            }
+        }
+        e.commit();*/
     }
 
 }

@@ -1,6 +1,11 @@
 package net.shybaieva.gameapp.Game;
 
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+
+import net.shybaieva.gameapp.R;
 
 public class BackgroundImage {
 
@@ -43,5 +48,26 @@ public class BackgroundImage {
                             AppConstans.getBitMapBank().getBackgroundWidth(),
                     getY(), null);
         }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public void endGameBackground(Canvas canvas, int score){
+        Paint paint =new Paint();
+        Paint paint1 = new Paint();
+        paint.setTextSize(100);
+        paint.getShader();
+        paint.setFakeBoldText(true);
+        paint.setColor(Color.parseColor("#EF6C00"));
+
+        paint1.setColor(Color.WHITE);
+        paint1.getShader();
+        paint1.setTextSize(60);
+        paint1.setFakeBoldText(true);
+
+        canvas.drawBitmap(AppConstans.getBitMapBank().getBackground(), 0, 0, null);
+        canvas.drawText("Game over\n",AppConstans.screenWidth/2-250, AppConstans.screenHigh/2, paint);
+        canvas.drawText("Your score: "+score, AppConstans.screenWidth/2-300, AppConstans.screenHigh/2-200, paint);
+        canvas.drawText("Your high score: "+score, AppConstans.screenWidth/2-400, AppConstans.screenHigh/2+200, paint);
+        canvas.drawText("Tap screen to play again", AppConstans.screenWidth/2-350, AppConstans.screenHigh-100, paint1);
     }
 }

@@ -13,6 +13,7 @@ public class AppConstans {
     static BitMapBank bitMapBank;
     static int lineHeight;
     static int gameBorders;
+    Context context;
 
     static int currentScore;
     static int speed=10;
@@ -45,8 +46,12 @@ public class AppConstans {
         AppConstans.screenHigh = height;
     }
 
-    public static int getGameBorders() {
-        return gameBorders;
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public int getCurrentScore() {
@@ -64,4 +69,5 @@ public class AppConstans {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+
 }

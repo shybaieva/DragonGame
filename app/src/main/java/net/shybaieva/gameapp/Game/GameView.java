@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
      GameThread gameThread;
+     SurfaceHolder holder;
      final String LOG_TAG = "MY_LOG_TAG";
 
     public GameView(Context context) {
@@ -21,7 +22,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     void initView(){
-        SurfaceHolder holder = getHolder();
+        holder=getHolder();
         holder.addCallback(this);
 
         setFocusable(true);
@@ -62,9 +63,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_UP){
-            int moveLine = (int) (event.getY()/AppConstans.lineHeight);
-            gameThread.drago.setVelocity(moveLine*AppConstans.lineHeight);
+        if(gameThread.isRunning){
+            if(event.getAction() == MotionEvent.ACTION_UP){
+                int moveLine = (int) (event.getY()/AppConstans.lineHeight);
+                gameThread.drago.setVelocity(moveLine*AppConstans.lineHeight);
+            }
+        }
+        else{
+            if(event.getAction()==MotionEvent.ACTION_DOWN){
+                gameThread = new GameThread(holder);
+                gameThread.start();
+            }
         }
         return true;
     }
