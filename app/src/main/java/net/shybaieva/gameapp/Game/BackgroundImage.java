@@ -67,7 +67,6 @@ public class BackgroundImage {
         canvas.drawBitmap(AppConstans.getBitMapBank().getBackground(), 0, 0, null);
         canvas.drawText("Game over\n",AppConstans.screenWidth/2-250, AppConstans.screenHigh/2, paint);
         canvas.drawText("Your score: "+score, AppConstans.screenWidth/2-300, AppConstans.screenHigh/2-200, paint);
-        canvas.drawText("Your high score: "+score, AppConstans.screenWidth/2-400, AppConstans.screenHigh/2+200, paint);
         canvas.drawText("Tap screen to play again", AppConstans.screenWidth/2-350, AppConstans.screenHigh-100, paint1);
     }
 }

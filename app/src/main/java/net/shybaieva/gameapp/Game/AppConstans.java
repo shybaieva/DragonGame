@@ -13,18 +13,18 @@ public class AppConstans {
     static BitMapBank bitMapBank;
     static int lineHeight;
     static int gameBorders;
-    Context context;
+
 
     static int currentScore;
     static int speed=10;
-    static int screenWidth, screenHigh, gravity;
+    static int screenWidth, screenHigh;// gravity;
 
 
     public static void init(Context context){
         setScreenSize(context);
         bitMapBank = new BitMapBank(context.getResources());
         gameBorders=bitMapBank.getDragonWidth();
-        gravity = 100;
+        //gravity = 100;
         lineHeight=180;
         currentScore=0;
     }
@@ -46,14 +46,6 @@ public class AppConstans {
         AppConstans.screenHigh = height;
     }
 
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
     public int getCurrentScore() {
         return currentScore;
     }
@@ -65,7 +57,6 @@ public class AppConstans {
     public int getSpeed() {
         return speed;
     }
-
     public void setSpeed(int speed) {
         this.speed = speed;
     }
