@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(isInternetWasConnected==1)
-           startActivity(new Intent(this, GameActivity.class));
-        if(isInternetWasConnected==0)
             startActivity(new Intent(this, WebViewActivity.class));
+        if(isInternetWasConnected==0)
+            startActivity(new Intent(this, GameActivity.class));
         if(isInternetWasConnected==2)
             Toast.makeText(this, "SOME PROBLEMS WITH PREFERENCES", Toast.LENGTH_SHORT).show();
         finish();
