@@ -16,7 +16,7 @@ public class GameThread extends Thread{
     Canvas canvas;
     boolean isRunning;
     int gameState = 0;// 0-not started, 1-game on, 2-game over
-    long startTime, loopTime, loopDelay =250;
+    long startTime, loopTime, loopDelay =100;
     int currentTime=0;
     public int score;
     final int timeForNewElement = 50;

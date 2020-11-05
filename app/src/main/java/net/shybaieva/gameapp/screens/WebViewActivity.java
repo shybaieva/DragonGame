@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 import net.shybaieva.gameapp.R;
 import net.shybaieva.gameapp.service.MyWebViewClient;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends AppCompatActivity implements View.OnClickListener {
 
     WebView webView;
     CardView topLine;
@@ -27,47 +27,27 @@ public class WebViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+
         init();
 
         webView.setWebViewClient(new MyWebViewClient());
 
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
         webView.loadUrl(url);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(webView.canGoBack()){
-                    webView.goBack();
-                }
-            }
-        });
+        back.setOnClickListener(this);
 
-        forward.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(webView.canGoForward())
-                    webView.goForward();
-            }
-        });
+        forward.setOnClickListener(this);
 
-        refreshPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                webView.reload();
-            }
-        });
+        refreshPage.setOnClickListener(this);
     }
-
-
 
     @Override
     public void onBackPressed() {
-        if(webView.canGoBack()){
+        if(webView.canGoBack())
             webView.goBack();
-        }
         else
             super.onBackPressed();
     }
@@ -79,11 +59,29 @@ public class WebViewActivity extends AppCompatActivity {
 
     private void init(){
         webView = findViewById(R.id.webView);
-
-
         back = findViewById(R.id.backBtn);
         forward = findViewById(R.id.forwardBtn);
         refreshPage = findViewById(R.id.refreshBtn);
         topLine = findViewById(R.id.topLine);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.backBtn:{
+                if(webView.canGoBack())
+                    webView.goBack();
+                break;
+            }
+            case R.id.forwardBtn:{
+                if(webView.canGoForward())
+                    webView.goForward();
+                break;
+            }
+            case R.id.refreshBtn:{
+                webView.reload();
+                break;
+            }
+        }
     }
 }
