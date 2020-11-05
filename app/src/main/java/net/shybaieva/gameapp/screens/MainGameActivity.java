@@ -22,7 +22,6 @@ public class MainGameActivity extends Activity {
     public int SCREEN_HEIGHT;
     GameThread gameThread;
     public int maxScore;
-    SharedPreferences preferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,26 +37,9 @@ public class MainGameActivity extends Activity {
         SCREEN_HEIGHT = size.y;
 
         gameView = new GameView(this);
-
         setContentView(gameView);
 
-        /*SharedPreferences sp = getSharedPreferences("MY_SETTINGS",
-                Context.MODE_PRIVATE);
-        boolean hasVisited = sp.getBoolean("hasPlayed", false);
-        SharedPreferences.Editor e = sp.edit();
 
-        if (!hasVisited) {
-            e.putBoolean("hasPlayed", true);
-            e.putInt("MaxScore", 1);
-        }
-        else{
-            if( preferences.getInt("MaxScore", 5)!=0)
-            maxScore =preferences.getInt("MaxScore", 0);
-            if(gameThread.score > maxScore){
-                e.putInt("MaxScore", gameThread.score);
-            }
-        }
-        e.commit();*/
     }
 
 }

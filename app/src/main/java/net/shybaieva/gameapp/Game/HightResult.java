@@ -3,14 +3,23 @@ package net.shybaieva.gameapp.Game;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.io.FileOutputStream;
+
 public class HightResult {
 
-    Context context;
-    SharedPreferences sharedPreferences;
+    private int currentScore;
 
-    public HightResult(Context context) {
-        this.context = context;
+    public HightResult(int currentScore, Context context){
+        this.currentScore=currentScore;
+        //
     }
 
+    public void read(){
+
+    }
+
+    public void write(){
+       // FileOutputStream fos =
+    }
 
 }

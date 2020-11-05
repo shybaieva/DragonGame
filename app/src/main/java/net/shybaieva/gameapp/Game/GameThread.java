@@ -1,15 +1,11 @@
 package net.shybaieva.gameapp.Game;
 
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.SurfaceHolder;
-
-import net.shybaieva.gameapp.screens.EndGameActivity;
-import net.shybaieva.gameapp.screens.MainGameActivity;
 
 import java.util.ArrayList;
 
@@ -19,7 +15,7 @@ public class GameThread extends Thread{
     Paint paint = new Paint();
     Canvas canvas;
     boolean isRunning;
-    static boolean gameState;
+    int gameState = 0;// 0-not started, 1-game on, 2-game over
     long startTime, loopTime, loopDelay =250;
     int currentTime=0;
     public int score;
@@ -50,8 +46,17 @@ public class GameThread extends Thread{
         AppConstans.speed=10;
     }
 
+    public int getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
+    }
+
     @Override
     public void run() {
+        gameState=1;
         while (isRunning){
             startTime = SystemClock.uptimeMillis();
             canvas = surfaceHolder.lockCanvas(null);
@@ -91,7 +96,7 @@ public class GameThread extends Thread{
         for (Pumpkin pumpkin: pumpkins
         ) {
             if( drago.getDragonX()+drago.getFrameWidth()-15>=pumpkin.getPumpkinX()&& drago.getDragonY()==pumpkin.getPumpkinY()){
-                gameState = false;
+                gameState= 2;
                 isRunning=false;
                 AppConstans.currentScore=score;
                 try {

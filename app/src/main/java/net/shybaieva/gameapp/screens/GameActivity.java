@@ -3,6 +3,7 @@ package net.shybaieva.gameapp.screens;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     ImageButton startGameBtn;
     boolean isClicked = false;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +34,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         startGameBtn.setOnClickListener(this);
 
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.start();
+            }
+        });
     }
 
     private void init (){
         startGameBtn = findViewById(R.id.startGameBtn);
+        mediaPlayer = MediaPlayer.create(this, R.raw.back_music);
+        mediaPlayer.start();
     }
+
+
 
     @Override
     public void onClick(View view) {
